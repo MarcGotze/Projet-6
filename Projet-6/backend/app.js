@@ -2,11 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const usersRoutes = require("./routes/users");
+const dotenv = require("dotenv");
+dotenv.config();
+const DB_USER = process.env.DB_USER;
+const DB_PASS = process.env.DB_PASS;
 
 //Connexion à MongoDB via mongoose
 mongoose
   .connect(
-    "mongodb+srv://mgotze:teRR0R5569!@cluster0.vgioaqu.mongodb.net/?retryWrites=true&w=majority",
+    `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.vgioaqu.mongodb.net/?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
