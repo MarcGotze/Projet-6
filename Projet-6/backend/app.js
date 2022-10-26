@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const usersRoutes = require("./routes/users");
+const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config();
 const DB_USER = process.env.DB_USER;
@@ -18,6 +19,7 @@ mongoose
 
 app.use(express.json());
 
+//Gestion du CORS
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -32,5 +34,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/auth", usersRoutes);
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;

@@ -1,6 +1,7 @@
 const http = require("http");
 const app = require("./app");
 
+//Création du serveur et gestion des erreurs
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
 
