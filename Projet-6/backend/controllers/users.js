@@ -49,25 +49,3 @@ exports.login = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
-
-exports.uploadImages = (req, res, next) => {
-  const imageObject = JSON.parse(req.body.thing);
-  delete imageObject._id;
-  delete imageObject._userId;
-  const user = new Users({
-    ...imageObject,
-    userId: req.auth.userId,
-    imageUrl: `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`,
-  });
-
-  user
-    .save()
-    .then(() => {
-      res.status(201).json({ message: "Image enregistrée !" });
-    })
-    .catch((error) => {
-      res.status(400).json({ error });
-    });
-};
