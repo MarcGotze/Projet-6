@@ -1,6 +1,7 @@
 //multer : gestion des requêtes HTTP avec envoi de fichiers
 const multer = require("multer");
 
+//Définition des formats de fichiers autorisés
 const MIME_TYPES = {
   "image/jpg": "jpg",
   "image/jpeg": "jpg",
@@ -8,6 +9,7 @@ const MIME_TYPES = {
   "image/png": "png",
 };
 
+//Stockage des fichiers dans le répértoires images après formatage des noms
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, "images");

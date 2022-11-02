@@ -1,18 +1,21 @@
 const Sauces = require("../models/Sauces");
 const fs = require("fs-extra");
 
+//Récupère toutes les sauces
 exports.getSauces = (req, res, next) => {
   Sauces.find()
     .then((sauces) => res.status(200).json(sauces))
     .catch((error) => res.status(400).json({ error }));
 };
 
+//Récupère une sauce
 exports.getThisSauce = (req, res, next) => {
   Sauces.findOne({ _id: req.params.id })
     .then((sauces) => res.status(200).json(sauces))
     .catch((error) => res.status(400).json({ error }));
 };
 
+//Créer une sauce
 exports.createSauce = (req, res, next) => {
   const imageObject = JSON.parse(req.body.sauce);
   delete imageObject._id;
@@ -39,6 +42,7 @@ exports.createSauce = (req, res, next) => {
     });
 };
 
+//Modifie une sauce
 exports.modifySauce = (req, res, next) => {
   const imageObject = req.file
     ? {
@@ -71,6 +75,7 @@ exports.modifySauce = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
+//Supprime une sauce
 exports.deleteSauce = (req, res, next) => {
   Sauces.findOne({ _id: req.params.id })
     .then((sauce) => {
@@ -83,6 +88,7 @@ exports.deleteSauce = (req, res, next) => {
     .catch((error) => res.status(401).json({ error }));
 };
 
+//Gestions des likes et dislikes d'une sauce
 exports.likeSauce = (req, res, next) => {
   switch (req.body.like) {
     case 0:
@@ -164,6 +170,6 @@ exports.likeSauce = (req, res, next) => {
         });
       break;
     default:
-      console.error("not today : mauvaise requête");
+      console.error("Mauvaise requête");
   }
 };

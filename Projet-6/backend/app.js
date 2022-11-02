@@ -20,7 +20,7 @@ mongoose
 
 app.use(express.json());
 
-//Gestion du CORS
+//Gestion des autorisations du CORS "Cross Origin Resource Sharing"
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
